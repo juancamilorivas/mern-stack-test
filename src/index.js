@@ -1,9 +1,25 @@
-const app = require('./app')
-require('./database');
+const express = require("express");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-async function main() {
-    await app.listen(3000);
-    console.log('server on port 4000')
-}
+const userRoutes = require("./routes/user")
 
-main();
+const app = express();
+const port = process.env.PORT || 9000;
+
+//Middelware
+app.use('/api', userRoutes)
+
+
+// Routes
+app.get("/", (req, res) => {
+  res.send("Welcome to my API");
+});
+
+//Mongodb Connection
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(console.log("Connected to Mongodb Atlas"))
+  .catch((error) => console.error(error));
+
+app.listen(port, () => console.log("Server listenign on port", port));
