@@ -24,3 +24,7 @@ Content-Type: application/json
     "age": "81",
     "email": "georgemendel@hotmail.com"
 }
+
+
+###
+DELETE http://localhost:9000/api/users/64179851c6218c29e073e77c HTTP/1.1
